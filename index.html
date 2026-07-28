@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木語森林 Timber & Craft | 精致原木手作生活</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 圖示 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts 粗體溫暖字型 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wood: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e7',
+                            200: '#eadeca',
+                            300: '#d7c0a3',
+                            600: '#8c5a3c',
+                            700: '#6f432a',
+                            800: '#4a2d1b',
+                            900: '#2d1a0e',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', 'Noto Serif TC', sans-serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1546484475-7f7bd55792da?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-wood-50 text-wood-900 flex flex-col min-h-screen">
+
+    <!-- 導覽列 -->
+    <nav class="sticky top-0 z-40 bg-wood-50/90 backdrop-blur-md border-b border-wood-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3">
+                <i class="fa-solid fa-[#8c5a3c] fa-tree text-2xl text-wood-600"></i>
+                <span class="font-serif font-bold text-2xl text-wood-800 tracking-wider">木語森林</span>
+            </a>
+
+            <!-- 選單連結 -->
+            <div class="hidden md:flex space-x-8 text-wood-700 font-medium">
+                <a href="#about" class="hover:text-wood-900 transition">關於品牌</a>
+                <a href="#products" class="hover:text-wood-900 transition">原木選品</a>
+                <a href="#features" class="hover:text-wood-900 transition">工藝堅持</a>
+            </div>
+
+            <!-- 購物車按鈕 -->
+            <button id="cartBtn" class="relative p-3 bg-wood-100 hover:bg-wood-200 text-wood-800 rounded-full transition flex items-center justify-center">
+                <i class="fa-solid fa-cart-shopping text-xl"></i>
+                <span id="cartCount" class="absolute -top-1 -right-1 bg-wood-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero 主視覺 -->
+    <header class="hero-bg text-white py-28 px-4 text-center flex flex-col items-center justify-center min-h-[500px]">
+        <span class="text-wood-200 text-sm tracking-widest uppercase mb-3 font-semibold">Handcrafted Wooden Elegance</span>
+        <h1 class="font-serif text-4xl sm:text-6xl font-bold mb-6 leading-tight max-w-3xl">讓森林的溫度，進入你的日常</h1>
+        <p class="text-wood-100 text-lg max-w-2xl mb-8 font-light">嚴選永續林業高品質原木，傳承匠人溫潤手感，為居家生活增添天然優雅的質感。</p>
+        <a href="#products" class="bg-wood-600 hover:bg-wood-700 text-white font-semibold px-8 py-3.5 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+            探索原木作品 <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+        </a>
+    </header>
+
+    <!-- 品牌理念 -->
+    <section id="about" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="p-6 bg-white rounded-2xl border border-wood-100 shadow-sm">
+                <div class="w-14 h-14 bg-wood-100 text-wood-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h3 class="font-serif font-bold text-xl mb-2">永續林木</h3>
+                <p class="text-wood-700 text-sm leading-relaxed">僅選用 FSC 認證管理林場之原木，珍惜每一寸自然資源。</p>
+            </div>
+            <div class="p-6 bg-white rounded-2xl border border-wood-100 shadow-sm">
+                <div class="w-14 h-14 bg-wood-100 text-wood-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-hands"></i>
+                </div>
+                <h3 class="font-serif font-bold text-xl mb-2">職人手工</h3>
+                <p class="text-wood-700 text-sm leading-relaxed">經過數十道打磨工序，保留獨一無二的天然木紋與細緻觸感。</p>
+            </div>
+            <div class="p-6 bg-white rounded-2xl border border-wood-100 shadow-sm">
+                <div class="w-14 h-14 bg-wood-100 text-wood-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-shield-heart"></i>
+                </div>
+                <h3 class="font-serif font-bold text-xl mb-2">無毒植物油塗裝</h3>
+                <p class="text-wood-700 text-sm leading-relaxed">採用食品級天然植物油推光，健康無毒，展現木材最真實的面貌。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 商品展示區 -->
+    <section id="products" class="py-16 bg-wood-100/50 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-wood-900 mb-2">精選原木作品</h2>
+                    <p class="text-wood-700">為生活注入自然的醇厚質感</p>
+                </div>
+                <!-- 篩選按鈕 -->
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="filterContainer">
+                    <button data-category="all" class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium bg-wood-600 text-white">全部</button>
+                    <button data-category="kitchen" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-wood-700 hover:bg-wood-200 border border-wood-200">廚房器皿</button>
+                    <button data-category="decor" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-wood-700 hover:bg-wood-200 border border-wood-200">家飾擺飾</button>
+                    <button data-category="furniture" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-wood-700 hover:bg-wood-200 border border-wood-200">小型家具</button>
+                </div>
+            </div>
+
+            <!-- 商品網格 -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 商品由 JavaScript 動態渲染 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-wood-900 text-wood-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center justify-center md:justify-start space-x-2 mb-4">
+                    <i class="fa-solid fa-tree text-wood-300 text-xl"></i>
+                    <span class="font-serif font-bold text-xl text-white">木語森林</span>
+                </div>
+                <p class="text-sm text-wood-300 leading-relaxed">我們致力於將自然的純粹與木作的溫暖融入每一個家庭，陪伴你紀錄生活的每個美好瞬間。</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-4">聯絡我們</h4>
+                <p class="text-sm text-wood-300 mb-2"><i class="fa-solid fa-envelope mr-2"></i> info@woodcraft.example.com</p>
+                <p class="text-sm text-wood-300"><i class="fa-solid fa-phone mr-2"></i> 02-2345-6789</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-4">關注我們</h4>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#" class="w-10 h-10 bg-wood-800 rounded-full flex items-center justify-center hover:bg-wood-600 transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+                    <a href="#" class="w-10 h-10 bg-wood-800 rounded-full flex items-center justify-center hover:bg-wood-600 transition"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-wood-800 pt-6 text-center text-xs text-wood-300">
+            &copy; 2026 木語森林 Timber & Craft. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- 購物車 Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 z-50 flex justify-end opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="cartContent">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-wood-200 flex items-center justify-between bg-wood-50">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-wood-600"></i>
+                    <h3 class="font-serif font-bold text-lg text-wood-800">您的購物車</h3>
+                </div>
+                <button id="closeCartBtn" class="text-wood-600 hover:text-wood-900 text-xl font-bold p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items Area -->
+            <div id="cartItemsContainer" class="p-5 flex-grow overflow-y-auto space-y-4">
+                <!-- 動態注入購物車項目 -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-5 border-t border-wood-200 bg-wood-50 space-y-4">
+                <div class="flex justify-between items-center text-lg font-bold text-wood-900">
+                    <span>小計金額</span>
+                    <span id="cartTotal" class="text-wood-700">NT$ 0</span>
+                </div>
+                <button id="checkoutBtn" class="w-full bg-wood-600 hover:bg-wood-700 text-white font-semibold py-3.5 rounded-lg transition shadow-md">
+                    前往結帳
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS 邏輯 -->
+    <script>
+        // 商品資料數據庫
+        const products = [
+            {
+                id: 1,
+                name: '北美胡桃木自然邊砧板',
+                category: 'kitchen',
+                price: 1880,
+                image: 'https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?auto=format&fit=crop&q=80&w=800',
+                desc: '保留原木邊緣自然線條，堅硬耐磨，托盤與切菜兩用。'
+            },
+            {
+                id: 2,
+                name: '日式櫻花木手工手工碗',
+                category: 'kitchen',
+                price: 920,
+                image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=800',
+                desc: '色澤溫潤質地細致，完美接住每一碗湯飯的溫熱。'
+            },
+            {
+                id: 3,
+                name: '柚木質感面紙盒',
+                category: 'decor',
+                price: 1250,
+                image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800',
+                desc: '簡約磁吸底蓋設計，富含天然油脂且抗潮性極佳。'
+            },
+            {
+                id: 4,
+                name: '橡木圓柱三腳小邊幾',
+                category: 'furniture',
+                price: 3600,
+                image: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80&w=800',
+                desc: '輕巧好移動，客廳沙發邊或床頭擺設的質感首選。'
+            },
+            {
+                id: 5,
+                name: '山毛櫸木長柄攪拌湯匙',
+                category: 'kitchen',
+                price: 350,
+                image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800',
+                desc: '質地輕巧，不易刮傷鍋具，居家料理料理的好幫手。'
+            },
+            {
+                id: 6,
+                name: '黑胡桃木無針幾何壁鐘',
+                category: 'decor',
+                price: 2100,
+                image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&q=80&w=800',
+                desc: '靜音機芯，紋理優雅，為牆面妝點一抹溫暖的平靜。'
+            }
+        ];
+
+        // 購物車 State
+        let cart = [];
+
+        // DOM 元素
+        const productGrid = document.getElementById('productGrid');
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartModal = document.getElementById('cartModal');
+        const cartContent = document.getElementById('cartContent');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            setupFilter();
+            setupCartEvents();
+        });
+
+        // 渲染商品
+        function renderProducts(items) {
+            productGrid.innerHTML = '';
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl overflow-hidden border border-wood-100 shadow-sm hover:shadow-md transition flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="h-52 overflow-hidden bg-wood-100">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-serif font-bold text-lg text-wood-900 mb-1">${product.name}</h3>
+                            <p class="text-xs text-wood-600 mb-3 line-clamp-2">${product.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between">
+                        <span class="text-wood-800 font-bold text-lg">NT$ ${product.price.toLocaleString()}</span>
+                        <button onclick="addToCart(${product.id})" class="bg-wood-100 hover:bg-wood-600 hover:text-white text-wood-800 p-2.5 rounded-lg transition flex items-center justify-center">
+                            <i class="fa-solid fa-plus text-sm mr-1"></i>
+                            <span class="text-xs font-semibold">加入購物車</span>
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        // 分類篩選邏輯
+        function setupFilter() {
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-wood-600', 'text-white');
+                        b.classList.add('bg-white', 'text-wood-700');
+                    });
+                    
+                    e.target.classList.remove('bg-white', 'text-wood-700');
+                    e.target.classList.add('bg-wood-600', 'text-white');
+
+                    const category = e.target.dataset.category;
+                    if (category === 'all') {
+                        renderProducts(products);
+                    } else {
+                        const filtered = products.filter(p => p.category === category);
+                        renderProducts(filtered);
+                    }
+                });
+            });
+        }
+
+        // 加入購物車
+        window.addToCart = function(productId) {
+            const product = products.find(p => p.id === productId);
+            const cartItem = cart.find(item => item.id === productId);
+
+            if (cartItem) {
+                cartItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            openCart();
+        };
+
+        // 變更購物車數量
+        window.updateQuantity = function(productId, delta) {
+            const cartItem = cart.find(item => item.id === productId);
+            if (cartItem) {
+                cartItem.quantity += delta;
+                if (cartItem.quantity <= 0) {
+                    cart = cart.filter(item => item.id !== productId);
+                }
+            }
+            updateCartUI();
+        };
+
+        // 更新購物車 UI
+        function updateCartUI() {
+            // 計算總數量
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalCount;
+
+            // 計算總價
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `NT$ ${totalAmount.toLocaleString()}`;
+
+            // 渲染購物車內品項
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-wood-600 py-12">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 opacity-40"></i>
+                        <p class="text-sm">購物車目前是空的</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center justify-between bg-wood-50 p-3 rounded-xl border border-wood-100">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex-grow ml-3">
+                        <h4 class="font-serif font-bold text-sm text-wood-900">${item.name}</h4>
+                        <p class="text-xs text-wood-600 font-semibold mt-1">NT$ ${item.price.toLocaleString()}</p>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white px-2 py-1 rounded-md border border-wood-200">
+                        <button onclick="updateQuantity(${item.id}, -1)" class="text-wood-600 hover:text-wood-900 px-1 font-bold">-</button>
+                        <span class="text-xs font-bold text-wood-800 w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)" class="text-wood-600 hover:text-wood-900 px-1 font-bold">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 開啟與關閉購物車 Modal
+        function setupCartEvents() {
+            cartBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+
+            // 點擊 Modal 背景關閉
+            cartModal.addEventListener('click', (e) => {
+                if (e.target === cartModal) closeCart();
+            });
+
+            // 模擬結帳
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('您的購物車是空的！');
+                    return;
+                }
+                alert('感謝您的購買！這是一個示範購物車結帳完成。');
+                cart = [];
+                updateCartUI();
+                closeCart();
+            });
+        }
+
+        function openCart() {
+            cartModal.classList.remove('opacity-0', 'pointer-events-none');
+            cartContent.classList.remove('translate-x-full');
+        }
+
+        function closeCart() {
+            cartModal.classList.add('opacity-0', 'pointer-events-none');
+            cartContent.classList.add('translate-x-full');
+        }
+    </script>
+</body>
+</html>
