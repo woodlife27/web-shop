@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>木語森林 Timber & Craft | 精致原木手作生活</title>
+    <title>木語森林 Timber & Craft | woodlife27.com</title>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 圖示 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts 粗體溫暖字型 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -50,7 +51,7 @@
     <nav class="sticky top-0 z-40 bg-wood-50/90 backdrop-blur-md border-b border-wood-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center space-x-3">
-                <i class="fa-solid fa-[#8c5a3c] fa-tree text-2xl text-wood-600"></i>
+                <i class="fa-solid fa-tree text-2xl text-wood-600"></i>
                 <span class="font-serif font-bold text-2xl text-wood-800 tracking-wider">木語森林</span>
             </a>
 
@@ -61,17 +62,25 @@
                 <a href="#features" class="hover:text-wood-900 transition">工藝堅持</a>
             </div>
 
-            <!-- 購物車按鈕 -->
-            <button id="cartBtn" class="relative p-3 bg-wood-100 hover:bg-wood-200 text-wood-800 rounded-full transition flex items-center justify-center">
-                <i class="fa-solid fa-cart-shopping text-xl"></i>
-                <span id="cartCount" class="absolute -top-1 -right-1 bg-wood-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
-            </button>
+            <!-- 右側功能鈕 -->
+            <div class="flex items-center space-x-3">
+                <!-- 後台管理入口 -->
+                <button id="openAdminBtn" class="p-2.5 text-wood-700 hover:text-wood-900 hover:bg-wood-100 rounded-full transition" title="管理員後台">
+                    <i class="fa-solid fa-sliders text-xl"></i>
+                </button>
+
+                <!-- 購物車按鈕 -->
+                <button id="cartBtn" class="relative p-3 bg-wood-100 hover:bg-wood-200 text-wood-800 rounded-full transition flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-wood-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- Hero 主視覺 -->
     <header class="hero-bg text-white py-28 px-4 text-center flex flex-col items-center justify-center min-h-[500px]">
-        <span class="text-wood-200 text-sm tracking-widest uppercase mb-3 font-semibold">Handcrafted Wooden Elegance</span>
+        <span class="text-wood-200 text-sm tracking-widest uppercase mb-3 font-semibold">woodlife27.com | Handcrafted Wooden Elegance</span>
         <h1 class="font-serif text-4xl sm:text-6xl font-bold mb-6 leading-tight max-w-3xl">讓森林的溫度，進入你的日常</h1>
         <p class="text-wood-100 text-lg max-w-2xl mb-8 font-light">嚴選永續林業高品質原木，傳承匠人溫潤手感，為居家生活增添天然優雅的質感。</p>
         <a href="#products" class="bg-wood-600 hover:bg-wood-700 text-white font-semibold px-8 py-3.5 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
@@ -116,17 +125,21 @@
                 </div>
                 <!-- 篩選按鈕 -->
                 <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="filterContainer">
-                    <button data-category="all" class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium bg-wood-600 text-white">全部</button>
+                    <button data-category="all" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-wood-600 text-white">全部</button>
                     <button data-category="kitchen" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-wood-700 hover:bg-wood-200 border border-wood-200">廚房器皿</button>
                     <button data-category="decor" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-wood-700 hover:bg-wood-200 border border-wood-200">家飾擺飾</button>
                     <button data-category="furniture" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-wood-700 hover:bg-wood-200 border border-wood-200">小型家具</button>
                 </div>
             </div>
 
-            <!-- 商品網格 -->
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- 商品由 JavaScript 動態渲染 -->
+            <!-- Loading 指示器 -->
+            <div id="loadingSpinner" class="text-center py-12">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-wood-600"></i>
+                <p class="text-wood-700 mt-2 text-sm">正在連線雲端資料庫同步數據...</p>
             </div>
+
+            <!-- 商品網格 -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
         </div>
     </section>
 
@@ -142,7 +155,7 @@
             </div>
             <div>
                 <h4 class="font-bold text-white mb-4">聯絡我們</h4>
-                <p class="text-sm text-wood-300 mb-2"><i class="fa-solid fa-envelope mr-2"></i> info@woodcraft.example.com</p>
+                <p class="text-sm text-wood-300 mb-2"><i class="fa-solid fa-envelope mr-2"></i> service@woodlife27.com</p>
                 <p class="text-sm text-wood-300"><i class="fa-solid fa-phone mr-2"></i> 02-2345-6789</p>
             </div>
             <div>
@@ -154,14 +167,13 @@
             </div>
         </div>
         <div class="border-t border-wood-800 pt-6 text-center text-xs text-wood-300">
-            &copy; 2026 木語森林 Timber & Craft. All rights reserved.
+            &copy; 2026 woodlife27.com All rights reserved.
         </div>
     </footer>
 
     <!-- 購物車 Modal -->
     <div id="cartModal" class="fixed inset-0 bg-black/60 z-50 flex justify-end opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300" id="cartContent">
-            <!-- Modal Header -->
             <div class="p-5 border-b border-wood-200 flex items-center justify-between bg-wood-50">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-cart-shopping text-wood-600"></i>
@@ -173,11 +185,16 @@
             </div>
 
             <!-- Cart Items Area -->
-            <div id="cartItemsContainer" class="p-5 flex-grow overflow-y-auto space-y-4">
-                <!-- 動態注入購物車項目 -->
+            <div id="cartItemsContainer" class="p-5 flex-grow overflow-y-auto space-y-4"></div>
+
+            <!-- Customer Checkout Info Form -->
+            <div id="checkoutForm" class="hidden p-5 border-t border-wood-200 bg-wood-50/50 space-y-3">
+                <h4 class="font-bold text-wood-900 text-sm">訂購人資訊（完成後傳送至雲端）</h4>
+                <input type="text" id="custName" placeholder="收件人姓名 *" class="w-full text-sm p-2.5 border border-wood-200 rounded-lg">
+                <input type="tel" id="custPhone" placeholder="聯絡電話 *" class="w-full text-sm p-2.5 border border-wood-200 rounded-lg">
+                <input type="text" id="custAddress" placeholder="寄送地址 *" class="w-full text-sm p-2.5 border border-wood-200 rounded-lg">
             </div>
 
-            <!-- Modal Footer -->
             <div class="p-5 border-t border-wood-200 bg-wood-50 space-y-4">
                 <div class="flex justify-between items-center text-lg font-bold text-wood-900">
                     <span>小計金額</span>
@@ -190,138 +207,307 @@
         </div>
     </div>
 
-    <!-- JS 邏輯 -->
-    <script>
-        // 商品資料數據庫
-        const products = [
-            {
-                id: 1,
-                name: '北美胡桃木自然邊砧板',
-                category: 'kitchen',
-                price: 1880,
-                image: 'https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?auto=format&fit=crop&q=80&w=800',
-                desc: '保留原木邊緣自然線條，堅硬耐磨，托盤與切菜兩用。'
-            },
-            {
-                id: 2,
-                name: '日式櫻花木手工手工碗',
-                category: 'kitchen',
-                price: 920,
-                image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=800',
-                desc: '色澤溫潤質地細致，完美接住每一碗湯飯的溫熱。'
-            },
-            {
-                id: 3,
-                name: '柚木質感面紙盒',
-                category: 'decor',
-                price: 1250,
-                image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800',
-                desc: '簡約磁吸底蓋設計，富含天然油脂且抗潮性極佳。'
-            },
-            {
-                id: 4,
-                name: '橡木圓柱三腳小邊幾',
-                category: 'furniture',
-                price: 3600,
-                image: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80&w=800',
-                desc: '輕巧好移動，客廳沙發邊或床頭擺設的質感首選。'
-            },
-            {
-                id: 5,
-                name: '山毛櫸木長柄攪拌湯匙',
-                category: 'kitchen',
-                price: 350,
-                image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800',
-                desc: '質地輕巧，不易刮傷鍋具，居家料理料理的好幫手。'
-            },
-            {
-                id: 6,
-                name: '黑胡桃木無針幾何壁鐘',
-                category: 'decor',
-                price: 2100,
-                image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&q=80&w=800',
-                desc: '靜音機芯，紋理優雅，為牆面妝點一抹溫暖的平靜。'
-            }
+    <!-- 後台管理 Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-5 bg-wood-900 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-sliders text-wood-300"></i>
+                    <h3 class="font-serif font-bold text-lg">woodlife27.com 雲端管理後台</h3>
+                </div>
+                <button id="closeAdminBtn" class="text-wood-300 hover:text-white text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- 密碼驗證區 -->
+            <div id="adminAuthArea" class="p-8 text-center flex flex-col items-center justify-center my-auto">
+                <i class="fa-solid fa-lock text-4xl text-wood-600 mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">請輸入管理者密碼</h4>
+                <p class="text-xs text-wood-600 mb-4">預設密碼為：<span class="font-mono bg-wood-100 px-2 py-1 rounded">admin123</span></p>
+                <div class="flex space-x-2 w-full max-w-xs">
+                    <input type="password" id="adminPasswordInput" class="border border-wood-300 p-2.5 rounded-lg w-full text-sm" placeholder="密碼">
+                    <button id="loginAdminBtn" class="bg-wood-600 hover:bg-wood-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm whitespace-nowrap">登入</button>
+                </div>
+            </div>
+
+            <!-- 後台內容區 (登入後顯示) -->
+            <div id="adminMainArea" class="hidden flex-grow flex flex-col overflow-hidden">
+                <!-- 頁籤分頁 -->
+                <div class="flex border-b border-wood-200 bg-wood-50 px-5 pt-3 space-x-4">
+                    <button id="tabProductsBtn" class="pb-3 border-b-2 border-wood-600 font-bold text-wood-900 text-sm">商品管理</button>
+                    <button id="tabOrdersBtn" class="pb-3 border-b-2 border-transparent font-medium text-wood-600 text-sm hover:text-wood-900">雲端訂單記錄</button>
+                    <div class="flex-grow"></div>
+                    <button id="seedDataBtn" class="mb-2 text-xs bg-wood-200 hover:bg-wood-300 text-wood-800 px-3 py-1.5 rounded-md font-semibold">
+                        <i class="fa-solid fa-database mr-1"></i> 匯入範例商品
+                    </button>
+                </div>
+
+                <!-- 商品管理 Tab -->
+                <div id="tabProductsContent" class="p-6 overflow-y-auto flex-grow space-y-6">
+                    <!-- 新增商品表單 -->
+                    <div class="bg-wood-50 p-5 rounded-xl border border-wood-200">
+                        <h4 class="font-bold text-wood-900 mb-4 text-sm flex items-center">
+                            <i class="fa-solid fa-plus-circle text-wood-600 mr-2"></i> <span id="formTitle">新增原木商品</span>
+                        </h4>
+                        <input type="hidden" id="prodEditId">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="prodName" placeholder="商品名稱" class="text-sm p-2.5 border rounded-lg">
+                            <select id="prodCategory" class="text-sm p-2.5 border rounded-lg bg-white">
+                                <option value="kitchen">廚房器皿</option>
+                                <option value="decor">家飾擺飾</option>
+                                <option value="furniture">小型家具</option>
+                            </select>
+                            <input type="number" id="prodPrice" placeholder="價格 (NT$)" class="text-sm p-2.5 border rounded-lg">
+                            <input type="url" id="prodImage" placeholder="圖片 URL 網址 (https://...)" class="text-sm p-2.5 border rounded-lg">
+                        </div>
+                        <textarea id="prodDesc" placeholder="商品簡介..." rows="2" class="w-full text-sm p-2.5 border rounded-lg mt-4"></textarea>
+                        <div class="flex justify-end space-x-2 mt-4">
+                            <button id="cancelEditBtn" class="hidden px-4 py-2 border rounded-lg text-xs font-semibold hover:bg-gray-100">取消修改</button>
+                            <button id="saveProductBtn" class="bg-wood-600 hover:bg-wood-700 text-white px-6 py-2 rounded-lg text-xs font-semibold">儲存雲端商品</button>
+                        </div>
+                    </div>
+
+                    <!-- 雲端商品列表 -->
+                    <div>
+                        <h4 class="font-bold text-wood-900 mb-3 text-sm">現有雲端商品列表</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm text-wood-800">
+                                <thead class="bg-wood-100 text-xs uppercase font-bold">
+                                    <tr>
+                                        <th class="p-3">圖片</th>
+                                        <th class="p-3">名稱</th>
+                                        <th class="p-3">分類</th>
+                                        <th class="p-3">價格</th>
+                                        <th class="p-3 text-right">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductTable" class="divide-y divide-wood-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 訂單紀錄 Tab -->
+                <div id="tabOrdersContent" class="hidden p-6 overflow-y-auto flex-grow">
+                    <h4 class="font-bold text-wood-900 mb-3 text-sm">雲端客戶訂單清單</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-wood-800">
+                            <thead class="bg-wood-100 text-xs uppercase font-bold">
+                                <tr>
+                                    <th class="p-3">時間</th>
+                                    <th class="p-3">訂購人</th>
+                                    <th class="p-3">電話/地址</th>
+                                    <th class="p-3">購買內容</th>
+                                    <th class="p-3">總額</th>
+                                    <th class="p-3">狀態</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrderTable" class="divide-y divide-wood-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自訂通知 Toast -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-wood-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 border border-wood-700 pointer-events-none">
+        <i id="toastIcon" class="fa-solid fa-circle-info text-wood-300"></i>
+        <span id="toastMessage" class="text-sm font-medium"></span>
+    </div>
+
+    <!-- 自訂對話框 Modal (取代 confirm) -->
+    <div id="confirmModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl border border-wood-200">
+            <div class="w-12 h-12 bg-wood-100 text-wood-700 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <h3 id="confirmTitle" class="font-bold text-lg text-wood-900 mb-2">確認操作</h3>
+            <p id="confirmMessage" class="text-sm text-wood-700 mb-6"></p>
+            <div class="flex space-x-3">
+                <button id="confirmCancelBtn" class="flex-1 py-2.5 border border-wood-300 rounded-lg text-sm font-semibold text-wood-700 hover:bg-wood-100">取消</button>
+                <button id="confirmOkBtn" class="flex-1 py-2.5 bg-wood-600 hover:bg-wood-700 text-white rounded-lg text-sm font-semibold">確定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase ES Module & Main Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase 配置金鑰
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "woodlife27-shop.firebaseapp.com",
+            projectId: "woodlife27-shop",
+            storageBucket: "woodlife27-shop.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'woodlife27-shop';
+
+        let app, db, auth;
+        let currentUser = null;
+        let isFirebaseAvailable = false;
+
+        // 全域狀態
+        let products = [];
+        let orders = [];
+        let cart = [];
+        let isCheckoutStep = false;
+        let activeCategoryFilter = 'all';
+
+        // 預設作品資料
+        const defaultSampleProducts = [
+            { id: 'prod_1', name: '北美胡桃木自然邊砧板', category: 'kitchen', price: 1880, image: 'https://images.unsplash.com/photo-1590794056226-77ef3a6c4743?auto=format&fit=crop&q=80&w=800', desc: '保留原木邊緣自然線條，堅硬耐磨，托盤與切菜兩用。' },
+            { id: 'prod_2', name: '日式櫻花木手工碗', category: 'kitchen', price: 920, image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=800', desc: '色澤溫潤質地細致，完美接住每一碗湯飯的溫熱。' },
+            { id: 'prod_3', name: '柚木質感面紙盒', category: 'decor', price: 1250, image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800', desc: '簡約磁吸底蓋設計，富含天然油脂且抗潮性極佳。' },
+            { id: 'prod_4', name: '橡木圓柱三腳小邊幾', category: 'furniture', price: 3600, image: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80&w=800', desc: '輕巧好移動，客廳沙發邊或床頭擺設的質感首選。' },
+            { id: 'prod_5', name: '山毛櫸木長柄湯匙', category: 'kitchen', price: 350, image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800', desc: '質地輕巧，不易刮傷鍋具，居家料理好幫手。' },
+            { id: 'prod_6', name: '黑胡桃木無針幾何壁鐘', category: 'decor', price: 2100, image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&q=80&w=800', desc: '靜音機芯，紋理優雅，為牆面妝點一抹溫暖的平靜。' }
         ];
 
-        // 購物車 State
-        let cart = [];
-
-        // DOM 元素
-        const productGrid = document.getElementById('productGrid');
-        const cartBtn = document.getElementById('cartBtn');
-        const closeCartBtn = document.getElementById('closeCartBtn');
-        const cartModal = document.getElementById('cartModal');
-        const cartContent = document.getElementById('cartContent');
-        const cartItemsContainer = document.getElementById('cartItemsContainer');
-        const cartCount = document.getElementById('cartCount');
-        const cartTotal = document.getElementById('cartTotal');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-
-        // 初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(products);
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initFirebase();
+            setupUIEvents();
             setupFilter();
-            setupCartEvents();
         });
 
-        // 渲染商品
+        // 初始化 Firebase 與 驗證
+        async function initFirebase() {
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                if (token) {
+                    const userCredential = await signInWithCustomToken(auth, token);
+                    currentUser = userCredential.user;
+                } else {
+                    const userCredential = await signInAnonymously(auth);
+                    currentUser = userCredential.user;
+                }
+
+                if (currentUser) {
+                    isFirebaseAvailable = true;
+                    listenToProductsCloud();
+                } else {
+                    useLocalFallback();
+                }
+            } catch (err) {
+                console.warn("Firebase 連結暫未完成，自動切換至展示模式:", err);
+                useLocalFallback();
+            }
+        }
+
+        function useLocalFallback() {
+            isFirebaseAvailable = false;
+            products = [...defaultSampleProducts];
+            const spinner = document.getElementById('loadingSpinner');
+            if (spinner) spinner.style.display = 'none';
+            renderProducts(products);
+            renderAdminProductTable();
+        }
+
+        // 監聽雲端商品 Collection (使用 Rule 1 指定嚴格路徑)
+        function listenToProductsCloud() {
+            if (!isFirebaseAvailable) return;
+
+            const productsCol = collection(db, 'artifacts', appId, 'public', 'data', 'products');
+            onSnapshot(productsCol, (snapshot) => {
+                products = [];
+                snapshot.forEach(docSnap => {
+                    products.push({ id: docSnap.id, ...docSnap.data() });
+                });
+
+                document.getElementById('loadingSpinner').style.display = 'none';
+
+                // 若雲端庫是空的，自動載入預設作品
+                if (products.length === 0) {
+                    products = [...defaultSampleProducts];
+                }
+
+                applyCategoryFilter();
+                renderAdminProductTable();
+            }, (error) => {
+                console.warn("Firestore 監聽失敗，切換至本地模式: ", error);
+                useLocalFallback();
+            });
+        }
+
+        // 監聽雲端訂單 Collection
+        function listenToOrdersCloud() {
+            if (!isFirebaseAvailable) return;
+
+            const ordersCol = collection(db, 'artifacts', appId, 'public', 'data', 'orders');
+            onSnapshot(ordersCol, (snapshot) => {
+                orders = [];
+                snapshot.forEach(docSnap => {
+                    orders.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                
+                // 記憶體排序（Rule 2：避免語法複合查詢）
+                orders.sort((a, b) => (b.createdAtTimestamp || 0) - (a.createdAtTimestamp || 0));
+                renderAdminOrderTable();
+            }, (error) => {
+                console.error("訂單監聽錯誤: ", error);
+            });
+        }
+
+        // 渲染前台商品
         function renderProducts(items) {
+            const productGrid = document.getElementById('productGrid');
             productGrid.innerHTML = '';
+            if (!items || items.length === 0) {
+                productGrid.innerHTML = `<div class="col-span-full text-center py-12 text-wood-600">該分類目前沒有作品。</div>`;
+                return;
+            }
+
             items.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-2xl overflow-hidden border border-wood-100 shadow-sm hover:shadow-md transition flex flex-col justify-between';
                 card.innerHTML = `
                     <div>
-                        <div class="h-52 overflow-hidden bg-wood-100">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        <div class="h-52 overflow-hidden bg-wood-100 relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/800x600/eadeca/4a2d1b?text=Timber+Craft'">
                         </div>
                         <div class="p-5">
                             <h3 class="font-serif font-bold text-lg text-wood-900 mb-1">${product.name}</h3>
-                            <p class="text-xs text-wood-600 mb-3 line-clamp-2">${product.desc}</p>
+                            <p class="text-xs text-wood-600 mb-3 line-clamp-2">${product.desc || '嚴選原木職人精心打磨製作。'}</p>
                         </div>
                     </div>
                     <div class="p-5 pt-0 flex items-center justify-between">
-                        <span class="text-wood-800 font-bold text-lg">NT$ ${product.price.toLocaleString()}</span>
-                        <button onclick="addToCart(${product.id})" class="bg-wood-100 hover:bg-wood-600 hover:text-white text-wood-800 p-2.5 rounded-lg transition flex items-center justify-center">
+                        <span class="text-wood-800 font-bold text-lg">NT$ ${Number(product.price).toLocaleString()}</span>
+                        <button data-id="${product.id}" class="add-to-cart-btn bg-wood-100 hover:bg-wood-600 hover:text-white text-wood-800 p-2.5 rounded-lg transition flex items-center justify-center">
                             <i class="fa-solid fa-plus text-sm mr-1"></i>
-                            <span class="text-xs font-semibold">加入購物車</span>
+                            <span class="text-xs font-semibold">加購物車</span>
                         </button>
                     </div>
                 `;
                 productGrid.appendChild(card);
             });
-        }
 
-        // 分類篩選邏輯
-        function setupFilter() {
-            filterBtns.forEach(btn => {
+            // 綁定購物車按鈕點擊
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    filterBtns.forEach(b => {
-                        b.classList.remove('bg-wood-600', 'text-white');
-                        b.classList.add('bg-white', 'text-wood-700');
-                    });
-                    
-                    e.target.classList.remove('bg-white', 'text-wood-700');
-                    e.target.classList.add('bg-wood-600', 'text-white');
-
-                    const category = e.target.dataset.category;
-                    if (category === 'all') {
-                        renderProducts(products);
-                    } else {
-                        const filtered = products.filter(p => p.category === category);
-                        renderProducts(filtered);
-                    }
+                    const prodId = e.currentTarget.dataset.id;
+                    addToCart(prodId);
                 });
             });
         }
 
         // 加入購物車
-        window.addToCart = function(productId) {
+        function addToCart(productId) {
             const product = products.find(p => p.id === productId);
-            const cartItem = cart.find(item => item.id === productId);
+            if (!product) return;
 
+            const cartItem = cart.find(item => item.id === productId);
             if (cartItem) {
                 cartItem.quantity += 1;
             } else {
@@ -330,31 +516,22 @@
 
             updateCartUI();
             openCart();
-        };
+            showToast(`已將「${product.name}」加入購物車`);
+        }
 
-        // 變更購物車數量
-        window.updateQuantity = function(productId, delta) {
-            const cartItem = cart.find(item => item.id === productId);
-            if (cartItem) {
-                cartItem.quantity += delta;
-                if (cartItem.quantity <= 0) {
-                    cart = cart.filter(item => item.id !== productId);
-                }
-            }
-            updateCartUI();
-        };
-
-        // 更新購物車 UI
         function updateCartUI() {
-            // 計算總數量
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const checkoutForm = document.getElementById('checkoutForm');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
             const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartCount.textContent = totalCount;
 
-            // 計算總價
             const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             cartTotal.textContent = `NT$ ${totalAmount.toLocaleString()}`;
 
-            // 渲染購物車內品項
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = `
                     <div class="h-full flex flex-col items-center justify-center text-wood-600 py-12">
@@ -362,56 +539,398 @@
                         <p class="text-sm">購物車目前是空的</p>
                     </div>
                 `;
+                checkoutForm.classList.add('hidden');
+                checkoutBtn.textContent = '前往結帳';
+                isCheckoutStep = false;
                 return;
             }
 
             cartItemsContainer.innerHTML = cart.map(item => `
                 <div class="flex items-center justify-between bg-wood-50 p-3 rounded-xl border border-wood-100">
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg" onerror="this.src='https://placehold.co/200x200/eadeca/4a2d1b?text=Wood'">
                     <div class="flex-grow ml-3">
                         <h4 class="font-serif font-bold text-sm text-wood-900">${item.name}</h4>
-                        <p class="text-xs text-wood-600 font-semibold mt-1">NT$ ${item.price.toLocaleString()}</p>
+                        <p class="text-xs text-wood-600 font-semibold mt-1">NT$ ${Number(item.price).toLocaleString()}</p>
                     </div>
                     <div class="flex items-center space-x-2 bg-white px-2 py-1 rounded-md border border-wood-200">
-                        <button onclick="updateQuantity(${item.id}, -1)" class="text-wood-600 hover:text-wood-900 px-1 font-bold">-</button>
+                        <button data-id="${item.id}" data-delta="-1" class="qty-btn text-wood-600 hover:text-wood-900 px-1 font-bold">-</button>
                         <span class="text-xs font-bold text-wood-800 w-4 text-center">${item.quantity}</span>
-                        <button onclick="updateQuantity(${item.id}, 1)" class="text-wood-600 hover:text-wood-900 px-1 font-bold">+</button>
+                        <button data-id="${item.id}" data-delta="1" class="qty-btn text-wood-600 hover:text-wood-900 px-1 font-bold">+</button>
                     </div>
                 </div>
             `).join('');
+
+            document.querySelectorAll('.qty-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.target.dataset.id;
+                    const delta = parseInt(e.target.dataset.delta);
+                    const item = cart.find(i => i.id === id);
+                    if (item) {
+                        item.quantity += delta;
+                        if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+                        updateCartUI();
+                    }
+                });
+            });
         }
 
-        // 開啟與關閉購物車 Modal
-        function setupCartEvents() {
-            cartBtn.addEventListener('click', openCart);
-            closeCartBtn.addEventListener('click', closeCart);
-
-            // 點擊 Modal 背景關閉
-            cartModal.addEventListener('click', (e) => {
-                if (e.target === cartModal) closeCart();
+        function setupUIEvents() {
+            // 購物車開啟關閉
+            document.getElementById('cartBtn').addEventListener('click', openCart);
+            document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+            document.getElementById('cartModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('cartModal')) closeCart();
             });
 
-            // 模擬結帳
-            checkoutBtn.addEventListener('click', () => {
+            // 結帳邏輯
+            document.getElementById('checkoutBtn').addEventListener('click', async () => {
                 if (cart.length === 0) {
-                    alert('您的購物車是空的！');
+                    showToast('購物車是空的，無法結帳');
                     return;
                 }
-                alert('感謝您的購買！這是一個示範購物車結帳完成。');
+
+                if (!isCheckoutStep) {
+                    document.getElementById('checkoutForm').classList.remove('hidden');
+                    document.getElementById('checkoutBtn').textContent = '確認送出雲端訂單';
+                    isCheckoutStep = true;
+                    return;
+                }
+
+                const name = document.getElementById('custName').value.trim();
+                const phone = document.getElementById('custPhone').value.trim();
+                const address = document.getElementById('custAddress').value.trim();
+
+                if (!name || !phone || !address) {
+                    showToast('請填寫完整訂購人資訊！');
+                    return;
+                }
+
+                const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const orderData = {
+                    customer: { name, phone, address },
+                    items: cart.map(i => ({ name: i.name, price: i.price, quantity: i.quantity })),
+                    total: totalAmount,
+                    status: '待處理',
+                    createdAtTimestamp: Date.now(),
+                    createdAt: new Date().toLocaleString('zh-TW')
+                };
+
+                if (isFirebaseAvailable) {
+                    try {
+                        const ordersCol = collection(db, 'artifacts', appId, 'public', 'data', 'orders');
+                        await addDoc(ordersCol, orderData);
+                        showToast('訂單已成功送出並同步至雲端後台！');
+                    } catch (e) {
+                        console.error("訂單傳送失敗:", e);
+                        orders.unshift(orderData);
+                        showToast('訂單已完成（已存入本地備份）');
+                    }
+                } else {
+                    orders.unshift(orderData);
+                    showToast('訂單已完成！');
+                }
+
                 cart = [];
+                document.getElementById('custName').value = '';
+                document.getElementById('custPhone').value = '';
+                document.getElementById('custAddress').value = '';
                 updateCartUI();
                 closeCart();
             });
+
+            // 後台 Modal 彈出與關閉
+            document.getElementById('openAdminBtn').addEventListener('click', () => {
+                document.getElementById('adminModal').classList.remove('opacity-0', 'pointer-events-none');
+            });
+            document.getElementById('closeAdminBtn').addEventListener('click', () => {
+                document.getElementById('adminModal').classList.add('opacity-0', 'pointer-events-none');
+            });
+
+            // 後台密碼登入
+            document.getElementById('loginAdminBtn').addEventListener('click', () => {
+                const pwd = document.getElementById('adminPasswordInput').value;
+                if (pwd === 'admin123') {
+                    document.getElementById('adminAuthArea').classList.add('hidden');
+                    document.getElementById('adminMainArea').classList.remove('hidden');
+                    if (isFirebaseAvailable) listenToOrdersCloud();
+                    else renderAdminOrderTable();
+                    showToast('管理員權限登入成功！');
+                } else {
+                    showToast('密碼錯誤！請輸入預設密碼 admin123');
+                }
+            });
+
+            // 後台 Tab 切換
+            const tabProductsBtn = document.getElementById('tabProductsBtn');
+            const tabOrdersBtn = document.getElementById('tabOrdersBtn');
+            const tabProductsContent = document.getElementById('tabProductsContent');
+            const tabOrdersContent = document.getElementById('tabOrdersContent');
+
+            tabProductsBtn.addEventListener('click', () => {
+                tabProductsBtn.className = "pb-3 border-b-2 border-wood-600 font-bold text-wood-900 text-sm";
+                tabOrdersBtn.className = "pb-3 border-b-2 border-transparent font-medium text-wood-600 text-sm hover:text-wood-900";
+                tabProductsContent.classList.remove('hidden');
+                tabOrdersContent.classList.add('hidden');
+            });
+
+            tabOrdersBtn.addEventListener('click', () => {
+                tabOrdersBtn.className = "pb-3 border-b-2 border-wood-600 font-bold text-wood-900 text-sm";
+                tabProductsBtn.className = "pb-3 border-b-2 border-transparent font-medium text-wood-600 text-sm hover:text-wood-900";
+                tabOrdersContent.classList.remove('hidden');
+                tabProductsContent.classList.add('hidden');
+            });
+
+            // 儲存/編輯商品
+            document.getElementById('saveProductBtn').addEventListener('click', async () => {
+                const editId = document.getElementById('prodEditId').value;
+                const name = document.getElementById('prodName').value.trim();
+                const category = document.getElementById('prodCategory').value;
+                const price = Number(document.getElementById('prodPrice').value);
+                const image = document.getElementById('prodImage').value.trim();
+                const desc = document.getElementById('prodDesc').value.trim();
+
+                if (!name || !price || !image) {
+                    showToast('請填寫完整商品名稱、價格與圖片網址');
+                    return;
+                }
+
+                const productData = { name, category, price, image, desc, updatedAt: Date.now() };
+
+                if (isFirebaseAvailable) {
+                    try {
+                        if (editId) {
+                            const productRef = doc(db, 'artifacts', appId, 'public', 'data', 'products', editId);
+                            await updateDoc(productRef, productData);
+                            showToast(`「${name}」已更新至雲端！`);
+                        } else {
+                            const productsCol = collection(db, 'artifacts', appId, 'public', 'data', 'products');
+                            await addDoc(productsCol, productData);
+                            showToast(`「${name}」已新增至雲端！`);
+                        }
+                    } catch (err) {
+                        showToast('雲端儲存失敗：' + err.message);
+                    }
+                } else {
+                    if (editId) {
+                        const index = products.findIndex(p => p.id === editId);
+                        if (index !== -1) products[index] = { id: editId, ...productData };
+                    } else {
+                        products.push({ id: 'prod_' + Date.now(), ...productData });
+                    }
+                    applyCategoryFilter();
+                    renderAdminProductTable();
+                    showToast('商品已更新');
+                }
+
+                resetProdForm();
+            });
+
+            document.getElementById('cancelEditBtn').addEventListener('click', resetProdForm);
+
+            // 匯入預設商品至雲端
+            document.getElementById('seedDataBtn').addEventListener('click', () => {
+                showCustomConfirm('匯入範例作品', '確定要將 6 項精選原木作品匯入雲端資料庫嗎？', async () => {
+                    if (isFirebaseAvailable) {
+                        const productsCol = collection(db, 'artifacts', appId, 'public', 'data', 'products');
+                        for (let p of defaultSampleProducts) {
+                            const { id, ...data } = p;
+                            await addDoc(productsCol, data);
+                        }
+                    } else {
+                        products = [...defaultSampleProducts];
+                        applyCategoryFilter();
+                        renderAdminProductTable();
+                    }
+                    showToast('範例作品已全數匯入！');
+                });
+            });
+        }
+
+        function renderAdminProductTable() {
+            const tbody = document.getElementById('adminProductTable');
+            if (!tbody) return;
+            tbody.innerHTML = products.map(p => `
+                <tr>
+                    <td class="p-3"><img src="${p.image}" class="w-12 h-12 object-cover rounded-lg" onerror="this.src='https://placehold.co/100x100/eadeca/4a2d1b?text=Wood'"></td>
+                    <td class="p-3 font-bold">${p.name}</td>
+                    <td class="p-3 text-xs text-wood-600">${p.category === 'kitchen' ? '廚房器皿' : p.category === 'decor' ? '家飾擺飾' : '小型家具'}</td>
+                    <td class="p-3 font-semibold">NT$ ${Number(p.price).toLocaleString()}</td>
+                    <td class="p-3 text-right space-x-2">
+                        <button data-id="${p.id}" class="edit-prod-btn text-blue-600 hover:underline text-xs font-bold">編輯</button>
+                        <button data-id="${p.id}" class="del-prod-btn text-red-600 hover:underline text-xs font-bold">刪除</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            document.querySelectorAll('.edit-prod-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => editProduct(e.target.dataset.id));
+            });
+            document.querySelectorAll('.del-prod-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => deleteProduct(e.target.dataset.id));
+            });
+        }
+
+        function editProduct(id) {
+            const p = products.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('prodEditId').value = p.id;
+            document.getElementById('prodName').value = p.name;
+            document.getElementById('prodCategory').value = p.category;
+            document.getElementById('prodPrice').value = p.price;
+            document.getElementById('prodImage').value = p.image;
+            document.getElementById('prodDesc').value = p.desc || '';
+            document.getElementById('formTitle').textContent = '修改原木商品';
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+        }
+
+        function deleteProduct(id) {
+            showCustomConfirm('刪除商品', '確定要從雲端刪除此項商品嗎？此操作無法復原。', async () => {
+                if (isFirebaseAvailable) {
+                    const productRef = doc(db, 'artifacts', appId, 'public', 'data', 'products', id);
+                    await deleteDoc(productRef);
+                } else {
+                    products = products.filter(p => p.id !== id);
+                    applyCategoryFilter();
+                    renderAdminProductTable();
+                }
+                showToast('商品已刪除');
+            });
+        }
+
+        function resetProdForm() {
+            document.getElementById('prodEditId').value = '';
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodPrice').value = '';
+            document.getElementById('prodImage').value = '';
+            document.getElementById('prodDesc').value = '';
+            document.getElementById('formTitle').textContent = '新增原木商品';
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        function renderAdminOrderTable() {
+            const tbody = document.getElementById('adminOrderTable');
+            if (!tbody) return;
+            if (orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-wood-600 text-xs">目前無客戶訂單。</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = orders.map(o => {
+                const itemsStr = o.items ? o.items.map(i => `${i.name} x${i.quantity}`).join('<br>') : '';
+                return `
+                    <tr>
+                        <td class="p-3 text-xs text-wood-600">${o.createdAt || '最新'}</td>
+                        <td class="p-3 font-bold">${o.customer ? o.customer.name : '顧客'}</td>
+                        <td class="p-3 text-xs">${o.customer ? o.customer.phone : ''}<br>${o.customer ? o.customer.address : ''}</td>
+                        <td class="p-3 text-xs">${itemsStr}</td>
+                        <td class="p-3 font-bold">NT$ ${Number(o.total || 0).toLocaleString()}</td>
+                        <td class="p-3">
+                            <button data-id="${o.id}" data-status="${o.status}" class="toggle-status-btn px-2.5 py-1 text-xs font-bold rounded ${o.status === '已出貨' ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-yellow-100 text-yellow-800 border border-yellow-300'}">
+                                ${o.status || '待處理'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.querySelectorAll('.toggle-status-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.target.dataset.id;
+                    const currentStatus = e.target.dataset.status;
+                    const newStatus = currentStatus === '已出貨' ? '待處理' : '已出貨';
+
+                    if (isFirebaseAvailable && id) {
+                        const orderRef = doc(db, 'artifacts', appId, 'public', 'data', 'orders', id);
+                        await updateDoc(orderRef, { status: newStatus });
+                    } else {
+                        const o = orders.find(item => item.id === id);
+                        if (o) o.status = newStatus;
+                        renderAdminOrderTable();
+                    }
+                    showToast(`訂單狀態已更新為「${newStatus}」`);
+                });
+            });
+        }
+
+        function setupFilter() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('bg-wood-600', 'text-white');
+                        b.classList.add('bg-white', 'text-wood-700');
+                    });
+                    
+                    e.currentTarget.classList.remove('bg-white', 'text-wood-700');
+                    e.currentTarget.classList.add('bg-wood-600', 'text-white');
+
+                    activeCategoryFilter = e.currentTarget.dataset.category;
+                    applyCategoryFilter();
+                });
+            });
+        }
+
+        function applyCategoryFilter() {
+            if (activeCategoryFilter === 'all') {
+                renderProducts(products);
+            } else {
+                renderProducts(products.filter(p => p.category === activeCategoryFilter));
+            }
         }
 
         function openCart() {
-            cartModal.classList.remove('opacity-0', 'pointer-events-none');
-            cartContent.classList.remove('translate-x-full');
+            document.getElementById('cartModal').classList.remove('opacity-0', 'pointer-events-none');
+            document.getElementById('cartContent').classList.remove('translate-x-full');
         }
 
         function closeCart() {
-            cartModal.classList.add('opacity-0', 'pointer-events-none');
-            cartContent.classList.add('translate-x-full');
+            document.getElementById('cartModal').classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('cartContent').classList.add('translate-x-full');
+        }
+
+        // 自訂非阻塞 Toast 提示
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = msg;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // 自訂無彈窗確認 Modal
+        function showCustomConfirm(title, message, onOk) {
+            const modal = document.getElementById('confirmModal');
+            document.getElementById('confirmTitle').textContent = title;
+            document.getElementById('confirmMessage').textContent = message;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+
+            const cancelBtn = document.getElementById('confirmCancelBtn');
+            const okBtn = document.getElementById('confirmOkBtn');
+
+            const handleCancel = () => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                cleanup();
+            };
+
+            const handleOk = () => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                cleanup();
+                onOk();
+            };
+
+            function cleanup() {
+                cancelBtn.removeEventListener('click', handleCancel);
+                okBtn.removeEventListener('click', handleOk);
+            }
+
+            cancelBtn.addEventListener('click', handleCancel);
+            okBtn.addEventListener('click', handleOk);
         }
     </script>
 </body>
